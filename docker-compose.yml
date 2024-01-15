@@ -1,0 +1,85 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - backend
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "4200:4200"
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - ./frontend:/app
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgres:/app
+    networks:
+      - backend
+    environment : 
+      - POSTGRES_DB=db1
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USERNAME=root
+    restart: always
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    networks:
+      - backend
+    restart: always
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  backend:
+    name: backend
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./backend
+  # frontend:
+  #   name: frontend
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: ./frontend
+  postgres:
+    name: postgres
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./postgres
+
+    # depends_on:
+    #   - postgres
+    # environment:
+    #   ./backend/.env
+  # postrgres:
+  #   build: ./postgres
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - ./postgres:/app
+  #   networks:
+  #     - backend
