@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   backend:
+    container_name: backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -11,19 +12,21 @@ services:
       - ./backend:/app
     networks:
       - backend
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "4200:4200"
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - backend
-  #   volumes:
-  #     - ./frontend:/app
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:3000"
+    depends_on:
+      - backend
+    networks:
+      - backend
+    volumes:
+      - ./frontend:/app
   postgres:
+    container_name: postgres
     image: postgres:latest
     ports:
       - "5433:5432"
@@ -37,6 +40,7 @@ services:
       - POSTGRES_USERNAME=root
     restart: always
   adminer:
+    container_name: adminer
     image: adminer
     ports:
       - "8081:8080"
@@ -56,13 +60,13 @@ volumes:
       type: none
       o: bind
       device: ./backend
-  # frontend:
-  #   name: frontend
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     o: bind
-  #     device: ./frontend
+  frontend:
+    name: frontend
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./frontend
   postgres:
     name: postgres
     driver: local
