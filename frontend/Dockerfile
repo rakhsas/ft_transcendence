@@ -1,6 +1,6 @@
 FROM node:20.10.0
 
-WORKDIR /app
+WORKDIR /app/front
 
 # Copy package.json and package-lock.json first to leverage Docker cache
 COPY package*.json ./
