@@ -27,6 +27,8 @@ services:
       - backend
     volumes:
       - ./frontend:/app/front
+    environment:
+      - WATCHPACK_POLLING=true
   postgres:
     container_name: postgres
     image: postgres:latest
