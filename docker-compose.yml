@@ -3,6 +3,7 @@ version: "3.8"
 services:
   backend:
     container_name: backend
+    image: backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -14,6 +15,7 @@ services:
       - backend
   frontend:
     container_name: frontend
+    image: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -24,7 +26,7 @@ services:
     networks:
       - backend
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app/front
   postgres:
     container_name: postgres
     image: postgres:latest
