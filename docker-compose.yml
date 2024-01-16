@@ -11,6 +11,7 @@ services:
       - "3002:3000"
     volumes:
       - ./backend:/app
+      - /app/node_modules
     networks:
       - backend
   frontend:
@@ -20,15 +21,17 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "4200:3000"
+      - "4200:4200"
     depends_on:
       - backend
     networks:
       - backend
     volumes:
-      - ./frontend:/app/front
+      - ./frontend:/app
+      - /app/node_modules
     environment:
-      - WATCHPACK_POLLING=true
+      # - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_USEPOLLING=true
   postgres:
     container_name: postgres
     image: postgres:latest

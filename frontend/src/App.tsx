@@ -7,47 +7,47 @@ import backgroundImage2 from './intra42.jpej.jpeg';
 
 import bgm from './Leonardo_Diffusion_XL_images_display_a_man_wears_a_jacket_and_0.jpg';
 
-interface UserForm 
-{
-    onSignIn:  
-    (
-        username: string, 
-        password: string
-    ) 
-        => void;
-    onSignUp: 
-    (
-        email: string, 
-        username: string,
-        password: string
-    ) 
-        => void;
-}
+// interface UserForm 
+// {
+//     onSignIn:  
+//     (
+//         username: string, 
+//         password: string
+//     ) 
+//         => void;
+//     onSignUp: 
+//     (
+//         email: string, 
+//         username: string,
+//         password: string
+//     ) 
+//         => void;
+// }
 
-interface User 
-{
-  email: string;
-  username: string;
-}
+// interface User 
+// {
+//   email: string;
+//   username: string;
+// }
 
 function FunctionSignUpForm()
 {
-  function SignFormOfUser({ onSignIn, onSignUp }: UserForm){
-    const [currentUser, setCurrentUser] = useState<User | null>(null);
+  // function SignFormOfUser({ onSignIn, onSignUp }: UserForm){
+  //   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-    const handleSignIn = () => 
-    {
-      const username = 'john_doe';
-      const password = 'password123';
-      onSignIn(username, password);
-    };
-    const handleSignUp = () => {
-      const email = 'john.doe@example.com';
-      const username = 'new_user';
-      const password = 'new_password123';
-      onSignUp(email, username, password);
-    };
-  }
+  //   const handleSignIn = () => 
+  //   {
+  //     const username = 'john_doe';
+  //     const password = 'password123';
+  //     onSignIn(username, password);
+  //   };
+  //   const handleSignUp = () => {
+  //     const email = 'john.doe@example.com';
+  //     const username = 'new_user';
+  //     const password = 'new_password123';
+  //     onSignUp(email, username, password);
+  //   };
+  // }
   const [ShowSignUp, SetShowSignUp]= useState<boolean>(false);
   const [ShowSignPassword1, SetShowPassword1]= useState<boolean>(false);
   const [ShowSignPassword2, SetShowPassword2]= useState<boolean>(false);
@@ -71,7 +71,7 @@ function FunctionSignUpForm()
   }
   // const Mp = MyComponent;
   return (
-    <section className={`container forms ${ShowSignUp ? "show-signup" : ""}`}  >
+    <section className={`containera forms ${ShowSignUp ? "show-signup" : ""}`}  >
       <div className="container2">
         <div className="list1">
           {/* Login Form */}
@@ -92,7 +92,7 @@ function FunctionSignUpForm()
                   <i onClick={FuncClick1} className={`eye-icon ${ShowSignPassword1 ? 'bx-show' : 'bx-hide'}`}></i>
                 </div>
                 <div className="form-link">
-                  <a href="#" className="forgot-pass">
+                  <a href="http://localhost:4200" className="forgot-pass">
                     Forgot password?
                   </a>
                 </div>
@@ -105,25 +105,25 @@ function FunctionSignUpForm()
               </form>
               <div className="form-link">
                 <span>
-                  <p>Don't have an account? </p> <a href="#" onClick={FuncClick} className="link signup-link">Signup</a>
+                  <p>Don't have an account? </p> <a href="http://localhost:4200" onClick={FuncClick} className="link signup-link">Signup</a>
                 </span>
               </div>
             </div>
             <div className="line"></div>
             <div className="media-options">
-              <a href="#" className="field intra" style={{backgroundImage: `url(${backgroundImage2})`}} >
+              <a href="http://localhost:4200" className="field intra" style={{backgroundImage: `url(${backgroundImage2})`}} >
                 <img src={Intra} alt="" className="google-img" />
                 <span>Login with Github</span>
               </a>
             </div>
             <div className="media-options">
-              <a href="#" className="field facebook">
+              <a href="http://localhost:4200" className="field facebook">
                 <img src={Github} alt="" className="google-img" />
                 <span>Login with Github</span>
               </a>
             </div>
             <div className="media-options">
-              <a href="#" className="field google">
+              <a href="http://localhost:4200" className="field google">
                 <img src={Google} alt="" className="google-img" />
                 <span>Login with Google</span>
               </a>
@@ -133,7 +133,7 @@ function FunctionSignUpForm()
           <div className="form signup">
             <div className="form-content">
               <header  >SignUp</header>
-              <form action="#">
+              <form action="http://localhost:4200">
                 <div className="field input-field">
                   <input type="email" placeholder="Email" className="input" />
                 </div>
@@ -154,25 +154,25 @@ function FunctionSignUpForm()
               </form>
               <div className="form-link">
                 <span>
-                 Already have an account? <a href="#" onClick={FuncClick} className="link login-link">Login</a>
+                 Already have an account? <a href="http://localhost:4200" onClick={FuncClick} className="link login-link">Login</a>
                 </span>
               </div>
             </div>
             <div className="line2"></div>
             <div className="media-options">
-              <a href="#" className="field intra" style={{backgroundImage: `url(${backgroundImage2})`}} >
+              <a href="http://localhost:4200" className="field intra" style={{backgroundImage: `url(${backgroundImage2})`}} >
                 <img src={Intra}  alt="" className="google-img" />
                 <span>Login with Github</span>
               </a>
             </div>
             <div className="media-options">
-              <a href="#" className="field facebook">
+              <a href="http://localhost:4200" className="field facebook">
                 <img src={Github}  alt="" className="google-img" />
                 <span>Login with Github</span>
               </a>
             </div>
             <div className="media-options">
-              <a href="#" className="field google">
+              <a href="http://localhost:4200" className="field google">
                 <img src={Google} alt="" className="google-img" />
                 <span>Login with Google</span>
               </a>
