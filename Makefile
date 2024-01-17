@@ -1,7 +1,7 @@
 
-all: up
+all: build up 
 
-up: build
+up: 
 	docker compose -f docker-compose.yml up -d
 
 build:
