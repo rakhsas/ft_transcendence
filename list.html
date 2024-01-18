@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Example</title>
+  <style>
+    /* Add your custom CSS styles here */
+
+    /* Modal styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7fafc;
+    }
+
+    .modal-btn {
+      background-color: #4299e1;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 50;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: calc(100% - 1rem);
+    }
+
+    .modal-content {
+      position: relative;
+      padding: 20px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 100%;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .close-btn {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.875rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .submit-btn {
+      background-color: #4299e1;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Modal toggle -->
+  <button
+    onclick="toggleModal('default-modal')"
+    class="modal-btn"
+    type="button"
+  >
+    Toggle modal
+  </button>
+
+  <!-- Main modal -->
+  <div
+    id="default-modal"
+    class="modal"
+  >
+    <div class="modal-content">
+      <!-- Modal content -->
+      <div class="modal-header">
+        <h3 class="modal-title">Information</h3>
+        <button
+          onclick="hideModal('default-modal')"
+          class="close-btn"
+        >
+          Close modal
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="file">Full Name</label>
+            <input
+              type="text"
+              id="file"
+              placeholder="Mohamed Darify"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Nick Name</label>
+            <input
+              type="text"
+              id="password"
+              placeholder="mdarify"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="fruitSelect">Gender</label>
+            <select id="fruitSelect" name="fruits">
+              <option value="apple">Male</option>
+              <option value="banana">Female</option>
+            </select>
+          </div>
+          <button
+            class="submit-btn"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript functions for modal functionality
+    function toggleModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    function hideModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
