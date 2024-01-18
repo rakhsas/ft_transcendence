@@ -20,7 +20,7 @@ export class AuthController {
         const user = req.user;
         console.log("user :", user)
         const firstLogin = req.user.firstLogin;
-        const accessToken = req.user.accessToken;
+        const accessToken = req.user.appAccessToken;
         const providerAccessToken = req.user.providerAccessToken;
         res.redirect(`http://localhost:4200/dashboard?firstLogin=${firstLogin}&accessToken=${accessToken}&provider=${providerAccessToken}`)
     }
