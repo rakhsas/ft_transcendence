@@ -8,7 +8,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "3002:3000"
+      - "3000:3000"
     volumes:
       - ./backend:/app
       - node_modules_back:/app/node_modules
@@ -66,11 +66,11 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./backend/node_modules
+      device: ${PWD}/backend/node_modules
   node_modules_front:
     name: node_modules_front
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ./frontend/node_modules
+      device: ${PWD}/frontend/node_modules
