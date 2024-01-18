@@ -8,10 +8,10 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "3002:3000"
+      - "3000:3000"
     volumes:
       - ./backend:/app
-      - /app/node_modules
+      - node_modules_back:/app/node_modules
     networks:
       - backend
   frontend:
@@ -28,7 +28,7 @@ services:
       - backend
     volumes:
       - ./frontend:/app
-      - /app/node_modules
+      - node_modules_front:/app/node_modules
     environment:
       # - CHOKIDAR_USEPOLLING=true
       - CHOKIDAR_USEPOLLING=true
@@ -41,7 +41,7 @@ services:
       - ./postgres:/app
     networks:
       - backend
-    environment : 
+    environment :
       - POSTGRES_DB=db1
       - POSTGRES_PASSWORD=root
       - POSTGRES_USERNAME=root
@@ -60,37 +60,17 @@ networks:
     driver: bridge
 
 volumes:
-  backend:
-    name: backend
+  node_modules_back:
+    name: node_modules_back
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ./backend
-  frontend:
-    name: frontend
+      device: ${PWD}/backend/node_modules
+  node_modules_front:
+    name: node_modules_front
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ./frontend
-  postgres:
-    name: postgres
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./postgres
-
-    # depends_on:
-    #   - postgres
-    # environment:
-    #   ./backend/.env
-  # postrgres:
-  #   build: ./postgres
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - ./postgres:/app
-  #   networks:
-  #     - backend
+      device: ${PWD}/frontend/node_modules
