@@ -1,1 +1,39 @@
-/* css styles */
+.backk {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url('./../assets/PhotoReal_Design_a_captivating_and_userfriendly_home_page_for_0.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.media-options a{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+
+.left {
+    background: rgb(23, 23, 23);
+}
+
+.box {
+    background: rgb(38, 39, 44);
+    color: white;
+    cursor: pointer;
+}
+
+.pic {
+    width: 35px;
+    height: 35px;
+    margin-block-end: 0.25rem;
+}
+.description {
+    display: inline;
+    align-content: center;
+}
+
+.box                            svg {
+    fill: #FFF;
+}
