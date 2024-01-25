@@ -12,7 +12,7 @@ export class AuthController {
             msg: '42 authentication'
         }
     }
-    
+
 
     @Get('42/callback')
     @UseGuards(AuthGuard('42'))
@@ -24,5 +24,24 @@ export class AuthController {
         const providerAccessToken = req.user.providerAccessToken;
         res.redirect(`http://localhost:4200/dashboard?firstLogin=${firstLogin}&accessToken=${accessToken}&provider=${providerAccessToken}`)
     }
-    
+
+    @Get('github/login')
+    @UseGuards(AuthGuard('github'))
+    handleGithubLogin() {
+        return {
+            msg: 'GitHub authentication',
+        };
+    }
+
+    @Get('github/callback')
+    @UseGuards(AuthGuard('github'))
+    async handleGithubRedirect(@Req() req, @Res() res) {
+        const user = req.user;
+        console.log("user :", user);
+        const firstLogin = req.user.firstLogin;
+        const accessToken = req.user.appAccessToken;
+        const providerAccessToken = req.user.providerAccessToken;
+        res.redirect(`http://localhost:4200/dashboard?firstLogin=${firstLogin}&accessToken=${accessToken}&provider=${providerAccessToken}`);
+    }
+
 }

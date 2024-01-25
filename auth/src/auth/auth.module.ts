@@ -4,9 +4,10 @@ import { PassportModule } from '@nestjs/passport';
 import { FortyTwoStrategy } from './utils/42-strategy';
 import { AuthService } from './auth.service';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { UserService } from 'src/user/user.service';
 import { UserModule } from 'src/user/user.module';
+import { UserService } from 'src/user/user.service';
 import { ConfigModule } from '@nestjs/config';
+import { GithubStrategy } from './utils/GithubStrategy';
 
 // console.log('process.env:', process.env);
 // console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET);
@@ -25,7 +26,7 @@ import { ConfigModule } from '@nestjs/config';
         })
     ],
     controllers: [AuthController],
-    providers: [ AuthService, FortyTwoStrategy, JwtService],
+    providers: [ AuthService, FortyTwoStrategy, GithubStrategy, JwtService],
     exports: [AuthService]
 })
 export class AuthModule {}
