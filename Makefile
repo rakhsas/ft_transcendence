@@ -5,7 +5,10 @@ up: build
 	docker compose -f docker-compose.yml up -d
 
 build:
-	mkdir -p backend/node_modules/
+	mkdir -p auth/node_modules/
+	mkdir -p chat/node_modules/
+	mkdir -p game/node_modules/
+	mkdir -p profile/node_modules/
 	mkdir -p frontend/node_modules/
 	docker compose -f docker-compose.yml build
 

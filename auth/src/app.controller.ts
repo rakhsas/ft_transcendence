@@ -26,11 +26,14 @@ export class AppController {
   //   const user = await this.appService.githubLogin(req);
   //   return res.redirect('http://localhost:4200/login');
   // }
-  @Get()
+    @Get()
     @UseGuards(AuthGuard('42'))
-  getHello(): string {
-    return this.appService.hello();
-  }
+    getHello(): string {
+      return this.appService.hello();
+    }
 
-  
+    @Get("getHello")
+    getHelo(): string {
+      return "RIIIIIIDOOX"
+    }
 }

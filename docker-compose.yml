@@ -1,19 +1,24 @@
 version: "3.8"
 
 services:
-  backend:
-    container_name: backend
-    image: backend
+  auth:
+    container_name: auth
+    image: auth
     build:
-      context: ./backend
+      context: ./auth
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
-      - ./backend:/app
+      - ./auth:/app
       - node_modules_back:/app/node_modules
     networks:
       - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.auth.rule=Host(`rakhsas.com`) && PathPrefix(`/auth/`)"
+      - "traefik.http.routers.auth.priority=10"
+      - "traefik.http.services.auth.loadbalancer.server.port=3000"
   frontend:
     container_name: frontend
     image: frontend
@@ -23,15 +28,86 @@ services:
     ports:
       - "4200:4200"
     depends_on:
-      - backend
+      - auth
     networks:
       - backend
     volumes:
       - ./frontend:/app
       - node_modules_front:/app/node_modules
-    environment:
-      # - CHOKIDAR_USEPOLLING=true
-      - CHOKIDAR_USEPOLLING=true
+
+  chat:
+    container_name: chat
+    image: chat
+    build:
+      context: ./chat
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - auth
+    networks:
+      - backend
+    volumes:
+      - ./chat:/app
+      - node_modules_chat:/app/node_modules
+    environment :
+      - AUTHENTICATION_HOST=auth
+      - AUTHENTICATION_PORT=3000
+      - FRONTEND_HOST=frontend
+      - DATABASE_HOST=postgres
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.chat.rule=Host(`rakhsas.com`) && PathPrefix(`/chat/`)"
+        - "traefik.http.services.chat.loadbalancer.server.port=3001"
+  profile:
+    container_name: profile
+    image: profile
+    build:
+      context: ./profile
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    depends_on:
+      - auth
+    networks:
+      - backend
+    volumes:
+      - ./profile:/app
+      - node_modules_profile:/app/node_modules
+    environment :
+      - AUTHENTICATION_HOST=auth
+      - AUTHENTICATION_PORT=3000
+      - FRONTEND_HOST=frontend
+      - DATABASE_HOST=postgres
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.profile.rule=Host(`rakhsas.com`) && PathPrefix(`/profile/`)"
+      - "traefik.http.services.profile.loadbalancer.server.port=3003"
+  game:
+    container_name: game
+    image: game
+    build:
+      context: ./game
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    depends_on:
+      - auth
+    networks:
+      - backend
+    volumes:
+      - ./game:/app
+      - node_modules_game:/app/node_modules
+    environment :
+      - AUTHENTICATION_HOST=auth
+      - AUTHENTICATION_PORT=3000
+      - FRONTEND_HOST=frontend
+      - DATABASE_HOST=postgres
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.game.rule=Host(`rakhsas.com`) && PathPrefix(`/game/`)"
+      - "traefik.http.services.game.loadbalancer.server.port=3003"
+  
   postgres:
     container_name: postgres
     image: postgres:latest
@@ -54,12 +130,51 @@ services:
     networks:
       - backend
     restart: always
+  traefik:
+    image: "traefik:v2.10"
+    container_name: "traefik"
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    depends_on:
+      - auth
+      - frontend
+      - chat
+      - profile
+      - game
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`rakhsas.com`) && PathPrefix(`/traefik/`)"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`rakhsas.com`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+    networks:
+      - backend
 
 networks:
   backend:
     name: backend
     driver: bridge
+    external: true
 
+# entryPoints:
+#   web:
+#     address: ":80"
 volumes:
   node_modules_back:
     name: node_modules_back
@@ -67,7 +182,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/backend/node_modules
+      device: ${PWD}/auth/node_modules
   node_modules_front:
     name: node_modules_front
     driver: local
@@ -75,3 +190,24 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/frontend/node_modules
+  node_modules_chat:
+    name: node_modules_chat
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/chat/node_modules
+  node_modules_game:
+    name: node_modules_game
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/game/node_modules
+  node_modules_profile:
+    name: node_modules_profile
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/profile/node_modules
