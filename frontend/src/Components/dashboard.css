@@ -1,7 +1,7 @@
 .backk {
     width: 100%;
     height: 100%;
-    background-image: url('./../assets/PhotoReal_Design_a_captivating_and_userfriendly_home_page_for_0.jpg');
+    background-image: url('./../assets/PhotoReal_Design_a_captivating_and_userfriendly_login_page_for_2.jpg');
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,7 +13,6 @@
     align-items: center;
     justify-content:center;
 }
-
 
 .left {
     background: rgb(23, 23, 23);
@@ -35,6 +34,6 @@
     align-content: center;
 }
 
-.box                            svg {
+.box svg {
     fill: #FFF;
 }

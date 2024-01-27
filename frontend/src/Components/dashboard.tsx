@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button, Modal, ModalBody } from 'flowbite-react';
-import Intra from './../assets/42.jpeg';
+import INTRA from './../assets/ping-pong-high-resolution-logo-white.svg';
 import GITHUB from './../assets/Vector.svg';
 import GOOGLE from './../assets/google.png'
-import PING from './../assets/PhotoReal_Design_a_captivating_and_userfriendly_home_page_for_0.jpg'
+import PING from './../assets/PhotoReal_Design_a_captivating_and_userfriendly_login_page_for_2.jpg'
 import './dashboard.css'
 import { Avatar } from 'flowbite-react';
 import AVATAR from './../assets/leonardo-logo.svg';
@@ -42,65 +42,18 @@ function DashboardComponent(): JSX.Element {
 
 	return (
 		<>
-			{/* <Modal show={openModal} >
-				<Modal.Header >Terms of Service</Modal.Header>
-				<Modal.Body>
-					<div className="space-y-6">
-						<p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-							With less than a month to go before the European Union enacts new consumer privacy laws for its citizens,
-							companies around the world are updating their terms of service agreements to comply.
-						</p>
-						<p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-							The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant
-							to ensure a common set of data rights in the European Union. It requires organizations to notify users as
-							soon as possible of high-risk data breaches that could personally affect them.
-						</p>
+			<header className="backk">
+				<nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+					<div className="flex lg:flex-1">
+						<a href="#" className="-m-1.5 p-1.5">
+							<span className="sr-only">Your Company</span>
+							
+						</a>
 					</div>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button onClick={() => setOpenModal(false)}>I accept</Button>
-					<Button color="gray" onClick={() => setOpenModal(false)}>
-						Decline
-					</Button>
-				</Modal.Footer>
-			</Modal> */}
-			<div className="w-screen h-screen backk">
-				<Modal show={true} size='500' style={{ margin: '0' }} className="sm:p-7 sm:mt-7 modall">
-					<ModalBody style={{ padding: '0' }} className="overflow-hidden">
-						<div className="flex">
-							<div className="w-full sm:w-1/4 p-4 left">
-								<div className="flex justify-center items-center space-x-4 rounded mx-auto my-auto" style={{ width: '100px', height: '100px' }}>
-									<div className="relative">
-										<img alt="" src={AVATAR} className="rounded" style={{ width: '100%', height: '100%' }} />
-									</div>
-								</div>
-								<p className="text-center text-md font-thin text-white mt-3" >
-									Sign up or log in with
-								</p>
-								<div className="flex items-center space-x-2  text-white p-2 rounded-lg box mt-4">
-									<img src={Intra} alt="" className="rounded-full h-8 w-8" />
-									<span className="font-semibold">Intra</span>
-								</div>
-								<div className="flex items-center space-x-2  text-white p-2 rounded-lg box mt-4">
-									<img src={GITHUB} alt="" className="rounded-full h-8 w-8" />
-									<span className="font-semibold">Github</span>
-								</div>
-								<div className="flex items-center space-x-2  text-white p-2 rounded-lg box mt-4">
-									<img src={GOOGLE} alt="" className="rounded-full h-8 w-8" />
-									<span className="font-semibold">Google</span>
-								</div>
-							</div>
-							<div className="hidden sm:block">
-								<img src={PING} alt="Your Image" className="w-full h-full object-cover" />
-							</div>
-						</div>
-					</ModalBody>
-				</Modal>
-			</div>
-
-
+				</nav>
+			</header>
 		</>
 	)
 }
 
-export default DashboardComponent;
+export default DashboardComponent

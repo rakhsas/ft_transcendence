@@ -14,9 +14,6 @@ services:
       - node_modules_back:/app/node_modules
     networks:
       - backend
-    dns:
-      - 8.8.8.8
-
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.services.auth.loadbalancer.server.port=3000'
@@ -39,7 +36,13 @@ services:
     volumes:
       - ./frontend:/app
       - node_modules_front:/app/node_modules
-
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.services.frontend.loadbalancer.server.port=4200'
+      - 'traefik.http.routers.frontend.rule=Host(`rakhsas.com`) && PathPrefix(`/front`)'
+      - 'traefik.http.routers.frontend.entrypoints=web'
+      - "traefik.http.routers.frontend.middlewares=frontend-prefix"
+      - "traefik.http.middlewares.frontend-prefix.stripprefix.prefixes=/front"
   chat:
     container_name: chat
     image: chat
@@ -171,7 +174,7 @@ networks:
   backend:
     name: backend
     driver: bridge
-    external: true
+    # external: true
 
 # entryPoints:
 #   web:
