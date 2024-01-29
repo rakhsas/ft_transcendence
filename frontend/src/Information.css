@@ -1,45 +1,53 @@
 .user-img {
-	width: 130px;
-	height: 130px;
-	border-radius: 50%;
-	/* margin: 15% 45%; */
-	margin: 25px 25px;
-
-  }
-  #photo {
-	width: 130px;
-	height: 130px;
-	border-radius: 50%;
-	/* transform: translateX(125%); */
-border: 2px solid #31304D;
-  }
-  #file {
-	display: none;
-  }
-.info
-{
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  /* margin: 15% 45%; */
+  margin: 25px 25px;
+}
+#photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  /* transform: translateX(125%); */
+  border: 2px solid #31304d;
+}
+#file {
+  display: none;
+}
+.info {
   font-weight: bold;
-  color:#807ebc;
+  color: #807ebc;
   text-decoration: underline;
 }
-.Sp{
-  
-  background-color: #161A30;
+.Sp {
+  background-color: #161a30;
 }
 
-  #uploadbtn {
-position: absolute;
-	height: 30px;
-	width: 30px;
-	padding: 6px 6px;
-	border-radius: 55%;
-	cursor: pointer;
-	color: white;
-/* transform: translateY(250%); */
-	transform: translateX(50%);
-	/* margin-top: 25px; */
-	margin-top: 25%;
-	background-color: #31304D;
+#uploadbtn {
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  padding: 6px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  /* transform: translateY(250%); */
+  /* transform: translateX(25%); */
+  transform: translateY(400%);
+  /* margin-top: 25px; */
+  /* margin-top: 25%; */
+  background-color: #31304d;
 
-	box-shadow: 2px 4px 4px rgb(0, 0, 0, 0.644);
-  }
+  box-shadow: 2px 4px 4px rgb(0, 0, 0, 0.644);
+}
+
+
+.cameraIcon {
+	width: 80%;
+	height: 80%;
+	/* margin: 5px; */
+}

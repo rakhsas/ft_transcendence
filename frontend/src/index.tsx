@@ -4,7 +4,7 @@ import FunctionSignUpForm from './App';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import ValidInformation from './Information';
-import DashboardComponent from './Components/dashboard';
+import DashboardComponent from './Components/dashboard/dashboard';
 
 
 const root = ReactDOM.createRoot(

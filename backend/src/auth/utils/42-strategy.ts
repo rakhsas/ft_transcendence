@@ -6,7 +6,7 @@ import { Strategy } from 'passport-42';
 import { Injectable } from "@nestjs/common";
 import { UserService } from "src/user/user.service";
 import { AuthService } from "../auth.service";
-import passport from "passport";
+
 
 @Injectable()
 
@@ -23,11 +23,14 @@ export class FortyTwoStrategy extends PassportStrategy(Strategy, '42') {
     }
 
     async validate(
+
         accessToken: string,
         refreshToken: string,
         profile: any,
         done: Function
-    ) {
+    ) 
+    
+    {
         try {
             // Check if email, name, and photos exist in the profile
             const email = profile?.emails?.[0]?.value;

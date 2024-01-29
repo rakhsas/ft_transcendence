@@ -6,6 +6,9 @@ import { User } from "src/user/entities/user";
 
 
 export class AuthService {
+    generateJwtToken(user: any) {
+      throw new Error('Method not implemented.');
+    }
     private readonly jwtSecret: string = 'jfdhsfjksdfdksf'
 
     constructor (

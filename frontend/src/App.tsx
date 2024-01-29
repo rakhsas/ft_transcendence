@@ -5,6 +5,7 @@ import Github from './assets/github.jpeg';
 import Intra from './assets/42.jpeg';
 import backgroundImage2 from './assets/intra42.jpej.jpeg';
 import bgm from './assets/Leonardo_Diffusion_XL_images_display_a_man_wears_a_jacket_and_0.jpg';
+import DashboardComponent from './Components/dashboard/dashboard';
 
 interface UserForm 
 {
@@ -56,7 +57,15 @@ function FunctionSignUpForm()
   const [email, setEmile] = useState<string>("");
   // const [username, setUsername] = useState<string>("");
   // const [password1, setPassword1] = useState<string>("");
-
+  const signIntra = () => {
+    window.location.href = "http://localhost:3000/api/auth/42/login"
+  }
+  const SignGitHub = () => {
+    window.location.href = "http://localhost:3000/auth/github/login"
+  }
+  const SignGoogle = () => {
+    window.location.href = "http://localhost:3000/auth/google/login"
+  }
   const FuncClick = () => {
     SetShowSignUp(!ShowSignUp);
   }
@@ -105,79 +114,31 @@ function FunctionSignUpForm()
               </form>
               <div className="form-link">
                 <span>
-                  <p>Don't have an account? </p> <a href="#" onClick={FuncClick} className="link signup-link">Signup</a>
+                  <p>Don't have an account? </p> <a href="#" className="link signup-link"></a>
                 </span>
               </div>
             </div>
             <div className="line"></div>
             <div className="media-options">
-              <a href="#" className="field intra" style={{backgroundImage: `url(${backgroundImage2})`}} >
+              <a onClick={signIntra}  href="#" className="field intra" style={{backgroundImage: `url(${backgroundImage2})`}} >
                 <img src={Intra} alt="" className="google-img" />
                 <span>Login with Intra42</span>
               </a>
             </div>
             <div className="media-options">
-              <a href="#" className="field facebook">
+              <a onClick={SignGitHub} href="#" className="field facebook">
                 <img src={Github} alt="" className="google-img" />
                 <span>Login with Github</span>
               </a>
             </div>
             <div className="media-options">
-              <a href="#" className="field google">
+              <a onClick={SignGoogle} href="#" className="field google">
                 <img src={Google} alt="" className="google-img" />
                 <span>Login with Google</span>
               </a>
             </div>
           </div>
           {/* Signup Form */}
-          <div className="form signup">
-            <div className="form-content">
-              <header  >SignUp</header>
-              <form action="#">
-                <div className="field input-field">
-                  <input type="email" placeholder="Email" className="input" />
-                </div>
-                <div className="field input-field">
-                  <input type="text" placeholder="User Name" className="input" />
-                </div>
-                <div className="field input-field">
-                    <input type={ShowSignPassword2 ? 'text' : 'password'} placeholder="Password" className="password" />
-                    <i onClick={FuncClick2} className={`eye-icon ${ShowSignPassword2 ? 'bx-show' : 'bx-hide'}`}></i>
-                </div>
-                <div className="field input-field">
-                  <input type={ShowSignPassword3 ? 'text' : 'password'} placeholder="Confirm Password" className="password" />
-                  <i onClick={FuncClick3} className={`eye-icon ${ShowSignPassword3 ? 'bx-show' : 'bx-hide'}`}></i>
-                </div>
-                <div className="field button-field">
-                  <button className="Sp">Sign Up</button>
-                </div>
-              </form>
-              <div className="form-link">
-                <span>
-                 Already have an account? <a href="#" onClick={FuncClick} className="link login-link">Login</a>
-                </span>
-              </div>
-            </div>
-            <div className="line2"></div>
-            <div className="media-options">
-              <a href="#" className="field intra" style={{backgroundImage: `url(${backgroundImage2})`}} >
-                <img src={Intra}  alt="" className="google-img" />
-                <span>Login with Intra42</span>
-              </a>
-            </div>
-            <div className="media-options">
-              <a href="#" className="field facebook">
-                <img src={Github}  alt="" className="google-img" />
-                <span>Login with Github</span>
-              </a>
-            </div>
-            <div className="media-options">
-              <a href="#" className="field google">
-                <img src={Google} alt="" className="google-img" />
-                <span>Login with Google</span>
-              </a>
-            </div>
-          </div>
         </div>
         {/* Placeholder for form2 content */}
         <div className="list2">
