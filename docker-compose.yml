@@ -4,6 +4,7 @@ services:
   auth:
     container_name: auth
     image: auth
+    hostname: rakhsas.com
     build:
       context: ./auth
       dockerfile: Dockerfile
@@ -45,7 +46,8 @@ services:
       - "traefik.http.middlewares.frontend-prefix.stripprefix.prefixes=/front"
   chat:
     container_name: chat
-    image: chat
+    image: chat                                           
+    hostname: rakhsas.com
     build:
       context: ./chat
       dockerfile: Dockerfile
@@ -173,8 +175,7 @@ services:
 networks:
   backend:
     name: backend
-    driver: bridge
-    # external: true
+    external: true
 
 # entryPoints:
 #   web:
