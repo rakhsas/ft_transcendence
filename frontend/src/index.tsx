@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import ValidInformation from './Information';
 import DashboardComponent from './Components/dashboard';
+import Game from './Components/Game/Game'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,9 +14,9 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/Dashboard" element={<DashboardComponent/>}/>
-      <Route path="/SignIn" element={<FunctionSignUpForm/>} >
-        </Route>
+      <Route path="/SignIn" element={<FunctionSignUpForm/>} />
       <Route path="/login"  element={<ValidInformation/>}/>
+      <Route path="/game"  element={<Game/>}/>
     </Routes>
   </BrowserRouter>
 );

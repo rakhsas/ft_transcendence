@@ -140,7 +140,6 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
     ports:
-      - "80:80"
       - "8080:8080"
     depends_on:
       - auth
@@ -170,7 +169,7 @@ networks:
   backend:
     name: backend
     driver: bridge
-    external: true
+      #i    external: true
 
 # entryPoints:
 #   web:
