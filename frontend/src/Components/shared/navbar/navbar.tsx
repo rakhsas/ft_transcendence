@@ -1,0 +1,12 @@
+import "./navbar.css"
+function NavbarComponent(): JSX.Element {
+    return (
+        <>
+            <div className="max-w-screen-2xl lg:max-w-screen-xl md:max-w-screen-md sm:max-w-screen-sm all">
+                {/* <SidebarComponent/> */}
+            </div>
+        </>
+    )
+}
+
+export default NavbarComponent;
