@@ -1,7 +1,6 @@
 FROM node:20.10.0
 
 WORKDIR /app
-# RUN npm config set registry https://registry.npmjs.org/
 
 COPY package*.json ./
 
