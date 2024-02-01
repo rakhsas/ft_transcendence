@@ -1,11 +1,14 @@
-import Canvas from './Canvas'
+import React from 'react';
+import Canvas from './Canvas';
 
-function Game(): JSX .Element{
-  return(
-    <div className="game--container bg-black w-full  h-lvh flex justify-center items-center ">
-      <Canvas />
-    </div>
-  )
-}
+const Game = () => {
+
+	return (<>
+		<Canvas
+			width={600}
+			height={400}
+		/>
+	</>);
+};
 
 export default Game;
