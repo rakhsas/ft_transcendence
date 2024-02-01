@@ -4,6 +4,7 @@ services:
   auth:
     container_name: auth
     image: auth
+    hostname: rakhsas.com
     build:
       context: ./auth
       dockerfile: Dockerfile
@@ -15,10 +16,12 @@ services:
     networks:
       - backend
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.auth.rule=Host(`rakhsas.com`) && PathPrefix(`/auth/`)"
-      - "traefik.http.routers.auth.priority=10"
-      - "traefik.http.services.auth.loadbalancer.server.port=3000"
+      - 'traefik.enable=true'
+      - 'traefik.http.services.auth.loadbalancer.server.port=3000'
+      - 'traefik.http.routers.auth.rule=Host(`rakhsas.com`) && PathPrefix(`/auth`)'
+      - 'traefik.http.routers.auth.entrypoints=web'
+      - "traefik.http.routers.auth.middlewares=auth-prefix"
+      - "traefik.http.middlewares.auth-prefix.stripprefix.prefixes=/auth"
   frontend:
     container_name: frontend
     image: frontend
@@ -32,12 +35,19 @@ services:
     networks:
       - backend
     volumes:
-      - ./frontend:/app
+      - ./frontEnd:/app
       - node_modules_front:/app/node_modules
-
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.services.frontend.loadbalancer.server.port=4200'
+      - 'traefik.http.routers.frontend.rule=Host(`rakhsas.com`) && PathPrefix(`/front`)'
+      - 'traefik.http.routers.frontend.entrypoints=web'
+      - "traefik.http.routers.frontend.middlewares=frontend-prefix"
+      - "traefik.http.middlewares.frontend-prefix.stripprefix.prefixes=/front"
   chat:
     container_name: chat
-    image: chat
+    image: chat                                           
+    hostname: rakhsas.com
     build:
       context: ./chat
       dockerfile: Dockerfile
@@ -47,18 +57,19 @@ services:
       - auth
     networks:
       - backend
+    dns:
+      - 8.8.8.8
+    env_file: ./.env
     volumes:
       - ./chat:/app
       - node_modules_chat:/app/node_modules
-    environment :
-      - AUTHENTICATION_HOST=auth
-      - AUTHENTICATION_PORT=3000
-      - FRONTEND_HOST=frontend
-      - DATABASE_HOST=postgres
     labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.chat.rule=Host(`rakhsas.com`) && PathPrefix(`/chat/`)"
-        - "traefik.http.services.chat.loadbalancer.server.port=3001"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.chat.rule=Host(`rakhsas.com`) && PathPrefix(`/chat`)'
+      - 'traefik.http.services.chat.loadbalancer.server.port=3001'
+      - 'traefik.http.routers.chat.entrypoints=web'
+      - "traefik.http.routers.chat.middlewares=chat-prefix"
+      - "traefik.http.middlewares.chat-prefix.stripprefix.prefixes=/chat"
   profile:
     container_name: profile
     image: profile
@@ -74,15 +85,14 @@ services:
     volumes:
       - ./profile:/app
       - node_modules_profile:/app/node_modules
-    environment :
-      - AUTHENTICATION_HOST=auth
-      - AUTHENTICATION_PORT=3000
-      - FRONTEND_HOST=frontend
-      - DATABASE_HOST=postgres
+    env_file: ./.env
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.profile.rule=Host(`rakhsas.com`) && PathPrefix(`/profile/`)"
-      - "traefik.http.services.profile.loadbalancer.server.port=3003"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.profile.rule=Host(`rakhsas.com`) && PathPrefix(`/profile`)'
+      - 'traefik.http.services.profile.loadbalancer.server.port=3003'
+      - 'traefik.http.routers.profile.entrypoints=web'
+      - "traefik.http.routers.profile.middlewares=profile-prefix"
+      - "traefik.http.middlewares.profile-prefix.stripprefix.prefixes=/profile"
   game:
     container_name: game
     image: game
@@ -98,16 +108,14 @@ services:
     volumes:
       - ./game:/app
       - node_modules_game:/app/node_modules
-    environment :
-      - AUTHENTICATION_HOST=auth
-      - AUTHENTICATION_PORT=3000
-      - FRONTEND_HOST=frontend
-      - DATABASE_HOST=postgres
+    env_file: ./.env
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.game.rule=Host(`rakhsas.com`) && PathPrefix(`/game/`)"
-      - "traefik.http.services.game.loadbalancer.server.port=3003"
-  
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.game.rule=Host(`rakhsas.com`) && PathPrefix(`/game`)'
+      - 'traefik.http.services.game.loadbalancer.server.port=3002'
+      - 'traefik.http.routers.game.entrypoints=web'
+      - "traefik.http.routers.game.middlewares=game-prefix"
+      - "traefik.http.middlewares.game-prefix.stripprefix.prefixes=/game"
   postgres:
     container_name: postgres
     image: postgres:latest
@@ -117,10 +125,7 @@ services:
       - ./postgres:/app
     networks:
       - backend
-    environment :
-      - POSTGRES_DB=db1
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_USERNAME=root
+    env_file: ./.env
     restart: always
   adminer:
     container_name: adminer
@@ -139,6 +144,7 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443" 
     ports:
       - "8080:8080"
     depends_on:
@@ -168,9 +174,6 @@ services:
 networks:
   backend:
     name: backend
-    driver: bridge
-      #i    external: true
-
 # entryPoints:
 #   web:
 #     address: ":80"

@@ -5,7 +5,7 @@ import { Observable, map } from 'rxjs';
 
 @Injectable()
 export class AppService {
-  uri = 'http://' + process.env.AUTHENTICATION_HOST + ':' + process.env.AUTHENTICATION_PORT +'/api/getHello';
+  uri = 'http://' + process.env.AUTHENTICATION_HOST +'getHello';
   constructor(private readonly httpService: HttpService) {}
 
   getHello(): string {
