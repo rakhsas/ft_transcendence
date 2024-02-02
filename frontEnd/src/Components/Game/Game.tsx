@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Canvas from './Canvas';
+import React from 'react';
+import Canvas from './Canvas/Canvas';
 
-
-function Game(): JSX.Element {
+const Game: React.ElementType = () => {
 	return (
-		<>
-			<Canvas width="500" height="500" />
-			<h1>hello form game</h1>
-		</>
+		<div className='h-[100vh] w-fill flex justify-center items-center flex-wrap'>
+			<Canvas 
+				className="border-black border-2"  
+				width={600}
+				height={400}
+			/>
+		</div>
 	);
 }
 export default Game;
