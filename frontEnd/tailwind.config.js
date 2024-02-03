@@ -2,14 +2,17 @@
 export default {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./index.html"
-    // "node_modules/flowbite-react/lib/esm/**/*.js",
+    "./index.html",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
     // "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {},
     screens: {
       'lg': '1700px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
     }
   },
   plugins: [
