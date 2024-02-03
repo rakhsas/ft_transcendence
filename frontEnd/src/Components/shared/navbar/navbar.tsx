@@ -1,10 +1,17 @@
 import "./navbar.css"
+import HomeIcon from '../icons/Home';
+import IconButton from '@mui/material/IconButton';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import Badge from '@mui/material/Badge';
+import MenuItem from '@mui/material/MenuItem';
+
+import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 function NavbarComponent(): JSX.Element {
+
     return (
-        <>
-            <div className="Side ml-48 mt-8 w-72 h-12 rounded-[20px] border-2 relative">
+        <div className="flex justify-between items-center h-20 px-8 relative">
+            <div className="scale-100 Side w-72 h-12 rounded-[20px] border-2 relative">
                 <div className="h-full bg-[#2C2729] rounded-xl top-0 left-0 right-0 bottom-0 flex flex-wrap justify-center items-center">
-                {/* <div className="flex items-center justify-center w-screen h-screen bg-gray-800"> */}
                     <div className="bg-transparent flex flex-row items-center">
                         <input type="search" name="q" className="mr-9 placeholder:text-white border-transparent focus:ring-transparent focus:border-transparent bg-transparent text-white py-2 text-sm rounded-md" placeholder="Search..." autoComplete="off"></input>
                         <span className="relative inset-y-0 left-0  pl-2 bg-transparent">
@@ -13,34 +20,36 @@ function NavbarComponent(): JSX.Element {
                             </button>
                         </span>
                     </div>
-                {/* <form method="GET">
-                </form> */}
-            {/* </div> */}
-                    {/* <div className="w-auto h-auto">
-                        <div className="w-auto h-[45px] relative flex flex-col justify-center items-center">
-                            <img src={logo} alt="" />
-                        </div>
+                </div>
+            </div>
+            <div className="icons ">
+                <div className="w-auto flex gap-8 flex-column items-center ">
+                    <div className="rounded-lg cursor-pointer">
+                        <HomeIcon activeIndex={0} />
                     </div>
-                    <div className="w-auto py-10">
-                        {icons.map((icon, index) => (
-                            <div
-                                key={index}
-                                className={`px-3 py-4 rounded-lg justify-start items-center gap-3 flex cursor-pointer ${activeIndex === index ? 'bg-[#2C2729]' : ''
-                                    }`}
-                                onClick={() => handleIconClick(index)}
+                    <div className="rounded-lg cursor-pointer">
+                        <HomeIcon activeIndex={0} />
+                    </div>
+                    {/* <div className="rounded-lg cursor-pointer">
+                        <HomeIcon activeIndex={1} />
+                    </div> */}
+                    {/* <div className="notification h-full">
+                        <MenuItem>
+                            <IconButton
+                            size="large"
+                            aria-label="show 17 new notifications"
+                            color="default"
                             >
-                                {icon.icon}
-                            </div>
-                        ))}
-                    </div>
-                    <div className="w-full flex flex-col justify-end items-center">
-                        <div className="p-2  rounded-lg justify-center items-center gap-2 flex">
-                            <LogoutIcon activeIndex={false} />
-                        </div>
+                            <Badge badgeContent={17} color="error">
+                                <NotificationsNoneOutlinedIcon />
+                            </Badge>
+                            </IconButton>
+                        </MenuItem>
                     </div> */}
                 </div>
             </div>
-        </>
+            
+        </div>
     )
 }
 

@@ -4,15 +4,41 @@ import SidebarComponent from "../shared/sidebar/sidebar";
 import "./Dashboard.css"
 // import Particle from "../shared/particles/particleBg";
 function DashboardComponent(): JSX.Element {
-  
+
   return (
-    <>
-      <div className="max-w-screen-2xl lg:max-w-screen-xl md:max-w-screen-md sm:max-w-screen-sm all">
-        {/* <Particle /> */}
+    <div className=" all flex">
+      <SidebarComponent />
+      <div className="container overflow-hidden">
         <NavbarComponent />
-        <SidebarComponent />
+        
+        <div className=" bg-white h-[100vh] flex-1 flex">
+
+          {/* main components */}
+          <main className="flex-1">
+            <section className="bg-red-700 h-1/3">
+              <ul>
+                <li>mode1</li>
+                <li>mode2</li>
+                <li>mode3</li>
+              </ul>
+            </section>
+            <section className="bg-green-700 h-2/3">
+              <ul>
+                <li>mode1</li>
+                <li>mode2</li>
+                <li>mode3</li>
+              </ul>
+            </section>
+          </main>
+          {/* aside components */}
+        </div>
       </div>
-    </>
+      <aside className="w-[35%] bg-orange-400 hidden md:block lg:block">
+        <div>one</div>
+        <div>one</div>
+        <div>one</div>
+      </aside>
+    </div>
   )
 }
 
