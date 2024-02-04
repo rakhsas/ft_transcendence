@@ -204,8 +204,8 @@ const useCanvas = (props: any) => {
 			drawArc(ball.x, ball.y, ball.radius, ball.color);
 		}
 		function game(){
-			update();
 			render();
+			update();
 		}
 		// number of frames per second
 		let framePerSecond = 50;
